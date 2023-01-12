@@ -1,0 +1,79 @@
+﻿
+@using WebMatrix.Data;
+@{ var db = Database.Open("student1");
+    var name = "";
+    var mobile = "";
+    var Adddress = "";
+    if (IsPost)
+    {
+        name = Request.Form["name"];
+        mobile = Request.Form["mobile"];
+        Adddress = Request.Form["adddress"];
+
+        var insertCommand = "INSERT INTO Table_1 (name,mobile,Adddress) Values(@0,@1,@2)";
+        db.Execute(insertCommand, name, mobile, Adddress);
+        Response.Redirect("~/Table_1");
+    }
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>insert</title>
+
+    <style type="text/css">
+        .grid {
+            margin: 4px;
+            border-collapse: collapse;
+            width: 300px;
+        }
+
+            .grid th, grid td {
+                border: 1px solid #fff;
+                padding: 5px;
+            }
+
+        .head {
+            background-color: #4573c1;
+            font-weight: bold;
+            color: #FFF;
+        }
+
+            .head a:link, a:visited, a:active, a:hover {
+                color: #fff;
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+        .alt {
+            background-color: #e2edf6;
+            color: #000;
+            text-align: center;
+        }
+
+            .alt:nth-of-type(even) {
+                background-color: #fff;
+                color: #000;
+                text-align: center;
+            }
+    </style>
+</head>
+<body>
+    <form method="post">
+        <label style="padding-right:24px;">Name:</label><input id="name" type="text" name="name" /><br />
+        <label style="padding-right:16px;">Mobile:</label><input id="mobile" type="text" name="mobile" /><br />
+        <label style="padding-right:2px;">Adddress:</label><input id="adddress" type="text" name="adddress" /><br />
+        <div style="margin-left:51px;margin-top:5px;">
+
+            <input style="margin-left:16px;" type="submit" value="Save" name="save" />
+            <input style="margin-left:10px;" id="de" type="button" onclick="document.getElementById('name').value = '',document.getElementById('mobile').value = '',document.getElementById('adddress').value = ''" value="Delete" name="delete" />
+        </div>
+    </form>
+    <br />
+    <a href="~/showdata.cshtml"><input type="submit" value="show data" /></a>
+    <script>
+
+    </script>
+</body>
+</html>
